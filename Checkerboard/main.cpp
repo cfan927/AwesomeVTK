@@ -21,7 +21,7 @@ void CreateCheckerboard(vtkPolyData *grid, int rlt, int sqrLen);
 void main()
 {
 	vtkSmartPointer<vtkPolyData> cb = vtkSmartPointer<vtkPolyData>::New();
-	CreateCheckerboard(cb, 10, 10);
+	CreateCheckerboard(cb, 10, 5);
 
 	vtkSmartPointer<vtkPolyDataMapper> mapper = vtkSmartPointer<vtkPolyDataMapper>::New();
 	mapper->SetInputData(cb);
@@ -73,11 +73,11 @@ void CreateCheckerboard(vtkPolyData *grid, int rlt, int sqrLen)
 			// 交错绘制黑白方格
 			if ((int)(i / rlt) % 2 == 0) // 偶数行
 			{
-				(i % 2 == 0) ? (currentColor = cWhite) : (currentColor = cBlack);
+				(i % rlt % 2 == 0) ? (currentColor = cWhite) : (currentColor = cBlack);
 			}
 			else // 奇数行
 			{
-				(i % 2 == 0) ? (currentColor = cBlack) : (currentColor = cWhite);
+				(i % rlt % 2 == 0) ? (currentColor = cBlack) : (currentColor = cWhite);
 			}
 		}
 		cellColor->InsertNextTypedTuple(currentColor);
